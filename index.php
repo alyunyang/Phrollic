@@ -58,7 +58,7 @@ include_once("base.php");
 	}
 	.texts{
 		margin-left: 490px;
-		
+		color: grey;
 	}
 	.alert{
 	margin-top: 200px;
@@ -150,9 +150,9 @@ include_once("base.php");
       </div>
    <footer class = "footer">
       <div class = "texts">
-      <small><a href = "about.php">About |</a></small>
-      <small><a href = "developers.php">Developers |</a></small>
-      <small><a href= "documentation.php">Documentation </a></small>
+      <small><a href = "about.php" style = "text-decoration: none;">About </a></small>
+      <small><a href = "developers.php"  style = "text-decoration: none; padding-left:10px;">Developers </a></small>
+      <small><a href= "documentation.php"  style = "text-decoration: none; padding-left:10px;">Documentation </a></small>
       <small>&copy 2013 Phrollic</small>
       </footer>
       </div>
