@@ -1,87 +1,5 @@
 <?php 
 include_once("base.php");
-
-//successes and errors are reset
-$errors = null;
-$success = null;
-
-//login
-if(isset($_POST['loginSubmit']) && $_POST['loginSubmit'] == 'true')
-{
-	$loginUsername =  trim($_POST['username']);
-	$loginPassword = trim($_POST['password']);
-	
-	if(!$errors)
-	{
-		$query = 'SELECT * FROM users WHERE username = "' .mysql_real_escape_string($loginUsername).'" AND password = MD5("' .$loginPassword .'")LIMIT 1';
-		$result = mysql_query($query);
-		if(mysql_num_rows($result) == 1)
-		{
-			$user = mysql_fetch_assoc($result);
-			$query = 'UPDATE users SET session_id ="' . session_id() . '"WHERE id = ' . $user['id'] . ' LIMIT 1';
-			mysql_query($query);
-			header('location:admin.php');
-			exit;
-		}
-		else
-		{
-			$errors = "Username / Password does not exist!";
-		}
-		
-		}
-	}
-if(isset($_POST['registerSubmit']) && $_POST['registerSubmit'] == 'true')
-{
-	$registerName = trim($_POST['name']);
-	$registerUsername = trim($_POST['username']);
-	$registerEmail = trim($_POST['email']);
-	$registerPassword = trim($_POST['password']);
-	$registerConfPass = trim($_POST['confirmPassword']);
-	
-	if(filter_var($registerEmail,FILTER_VALIDATE_EMAIL) != true)
-	{
-		$errors= 'Usernames must be more greater than or equal to 6 characters';
-	}
-     	
-     
-    if(strlen($registerUsername) < 6)
-    {
-    	$errors = 'Usernames must be more greater than or equal to 6 characters';
-    	
-    }
-    if(strlen($registerPassword) < 6)
-    	$errors = 'Password must be greater than or equal to 6 characters';
-    	
-    if($registerPassword != $registerConfirmPassword)
-    	$errors = 'Your password did not match.';
-    	
-    $checkEmail = 'SELECT * FROM users WHERE email = "' . mysql_real_escape_string($registerEmail) . '"LIMIT 1';
-    $result = mysql_query($checkEmail);
-    
-    if(mysql_num_rows($result) == 1)
-    	$errors = 'This email address already exists';
-    
-    
-    $checkUsername = 'SELECT * FROM users WHERE username = "' . mysql_real_escape_string($registerUsername) . '"LIMIT 1';
-    $result1 = mysql_query($checkUsername);
-    
-    if(mysql_num_rows($result1) == 1)
-    	$errors = 'This username already exists';
-    	
-     if(!$errors)
-     {  
-        $query = 'INSERT INTO users SET name = "' . mysql_real_escape_string($registerName) . '",username = "' . mysql_real_escape_string($registerUsername) . '", email = "' . mysql_real_escape_string($registerEmail) . '", password = MD5("' . mysql_real_escape_string($registerPassword) . '"),  date_registered = "' . date('Y-m-d H:i:s') . '"';  
-	 
-	 	if(mysql_query($query))
-	 	{
-	 		$success = 'Thank you for registering. You can now log in on the left.';
-	 	}
-	 	else
-	 	{
-	 		$errors = 'There was a problem registering you.Please check your details and try again';
-	 	}
-	 }
-	 }
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">    
@@ -184,25 +102,7 @@ if(isset($_POST['registerSubmit']) && $_POST['registerSubmit'] == 'true')
       </div>
     </div><!-- /navbar-inner -->
   </div><!-- /navbar -->
- 	 <?php
-    	if($errors == 'true')
-    	{
-    		?>
-				<div class="alert">
-  				<button type="button" class="close" data-dismiss="alert">&times;</button>
-  				<strong>Warning!</strong> Email address is invalid</div>
-  			<?php
-  		}
-  		/*else if($success != 'true')
-  		{
-  			?>
-				<div class="success">
-  				<button type="button" class="close" data-dismiss="alert">&times;</button>
-  				<strong>Success!</strong> You have registered</div>
-  			<?php
-  		}
-  		else{*/
-  		?>
+ 	
         </div> 
        <div class="row-fluid pricing-table pricing-three-column">
         <div class="span4 plan">
