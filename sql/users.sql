@@ -1,12 +1,8 @@
 /* put this into phpMyAdmin to create the table*/
-CREATE TABLE  `users` ( 
- `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
- `email` VARCHAR( 255 ) NOT NULL ,
- `name` VARCHAR( 120 ) NOT NULL ,
- `password` VARCHAR( 32 ) NOT NULL ,
- `session_id` VARCHAR( 32 ) NULL ,
- `date_registered` DATETIME NOT NULL ,
-UNIQUE (
-`email`
+CREATE TABLE `users` (  
+`UserID` INT(25) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`Name` VARCHAR(32) NOT NULL ,  
+`Username` VARCHAR(65) NOT NULL ,  
+`Password` VARCHAR(32) NOT NULL ,  
+`Email` VARCHAR(255) NOT NULL  
 )
-) ENGINE = MYISAM ;
