@@ -1,5 +1,6 @@
 <?php 
 include_once("base.php");
+
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">    
@@ -102,8 +103,53 @@ include_once("base.php");
       </div>
     </div><!-- /navbar-inner -->
   </div><!-- /navbar -->
- 	
-        </div> 
+ 	<?php
+ 	//LOGIN FORM
+ 	//sees if login button has been pressed and if the user is already logged in
+	if($_POST['loginSubmit']&&!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
+ 	{
+	//redirects to admin page
+	?>
+	<script>
+	alert("You're already logged in.");
+	</script>
+	<meta content="0;admin.php" http-equiv="refresh"> 
+	<?php
+	
+}
+//checksif the login button is pressed and if the username and password text boxes have been filled
+elseif($_POST['loginSubmit']&&$_POST['loginSubmit'] == true && !empty($_POST['username']) && !empty($_POST['password']))
+{
+	$username = mysql_real_escape_string($_POST['username']);//grabs username
+	$password = md5(mysql_real_escape_string($_POST['password']));//grabs password and hashes it
+	
+	$checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."'AND Password = '".$password."'"); //compares entered text to info in the database
+	if(mysql_num_rows ($checklogin) == 1)//if data matches
+	{
+		$row = mysql_fetch_array($checklogin);
+		$email = $row['Email'];
+		
+		$_SESSION['Name'] = $name;
+		$_SESSION['Username'] = $username;
+		$_SESSION['Email'] = $email;
+		$_SESSION['LoggedIn'] = 1;
+		
+}  
+    else//if data doesn't match  
+    {  
+    	?>
+    		<script>
+    			alert("Could not find username/password!");
+    			history.back();
+    		</script>
+          <?php
+    }  
+} 
+ 
+else //default form  
+{  
+    ?>  
+      </div> 
        <div class="row-fluid pricing-table pricing-three-column">
         <div class="span4 plan">
           <div class="plan-name-bronze">
@@ -120,6 +166,12 @@ include_once("base.php");
           <input type="submit" class="btn btn-large btn-success" value="Login"/>  
     </form></p>
     <br/> <br/> <br/> 
+  
+   <?php  
+}  
+?>  
+ 	
+ 	
 
 </div>
        <div class="span4">
@@ -127,6 +179,93 @@ include_once("base.php");
          <h3>Welcome to Phrollic .</h3>
         </div>
         </div>
+        
+<?php
+//REGISTRATION FORM
+//checks if register button is pressed and if username and password boxes have been filled
+if($_POST['registerSubmit'] && $_POST['registerSubmit'] == true && !empty($_POST['username']) && !empty($_POST['password']))
+{
+		$name = mysql_real_escape_string($_POST['name']);//grabs name
+		$username = mysql_real_escape_string($_POST['username']);//grabs username
+		$password = mysql_real_escape_string($_POST['password']);//grabs password
+		$email = mysql_real_escape_string($_POST['email']);//grabs email
+		$confirmpass = mysql_real_escape_string($_POST['password2']);
+		
+		//checks if username is already in the database
+		$checkuser = mysql_query("SELECT * FROM users WHERE Username = '".$username."'");
+		if(mysql_num_rows($checkuser) == 1)
+		{
+			?>
+				<script>
+					alert("Sorry, that username is taken.");
+					history.back();
+				</script>
+			<?php
+		}
+		//checks if email is already in the database
+		$checkemail = 'SELECT * FROM users WHERE email = "' . $email . '" LIMIT 1';
+		$result = mysql_query($checkemail);
+		elseif(mysql_num_rows($result) == 1)
+		{
+			?>
+				<script>
+					alert("Sorry, that email is already associated with an account");
+					history.back();
+				</script>
+			<?php
+		}
+		//checks if passwords match
+		elseif(!($password == $confirmpass))
+		{
+			?>
+				<script>
+					alert("The passwords did not match.");
+					history.back();
+				</script>
+			<?
+		}
+		//checks to see if email is valid
+		elseif(filter_var($email, FILTER_VALIDATE_EMAIL) != true)
+		{
+			?>
+				<script>
+					alert("Please enter a valid email");
+					history.back();
+				</script>
+			<?
+		}
+		//if registration passes all validation
+		else
+		{
+			$hashedpass = md5($password);//hashing password afterwards so that it can be compared to the confirm password
+			//insert info into database
+			$registerquery = mysql_query("INSERT INTO users(Name,Username,Password,Email) VALUES('".$username."','".$hashedpass."','".$email."')" );
+			//if successfully registered
+			if($registerquery)
+			{	
+				?>
+				<script>
+				alert("You successfully registered!");
+				history.back();
+				</script>
+				<?php
+			}
+			//if not successfully registered
+			else
+			{
+				?>
+					<script>
+					alert("Sorry, your registration failed.");
+					history.back();
+					</script>
+				<?php
+			}
+		}
+		
+}
+else//default form
+{
+	?>
 		 <div class="span4 plan">
           <div class="plan-name-gold">
             <h2>Register</h2>
@@ -148,6 +287,9 @@ include_once("base.php");
     </p>
         </div>
       </div>
+      <?php
+}
+?>
    <footer class = "footer">
       <div class = "texts">
       <small><a href = "about.php" style = "text-decoration: none;">About </a></small>
@@ -159,6 +301,7 @@ include_once("base.php");
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/jquery.smooth-scroll.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="bootbox-master/bootbox.min.js"></script>
     <script src="js/bootswatch.js"></script>
 </body>  
 </html>
