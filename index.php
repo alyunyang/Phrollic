@@ -106,19 +106,9 @@ include_once("base.php");
  	<?php
  	//LOGIN FORM
  	//sees if login button has been pressed and if the user is already logged in
-	if($_POST['loginSubmit']&&!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
- 	{
-	//redirects to admin page
-	?>
-	<script>
-	alert("You're already logged in.");
-	</script>
-	<meta content="0;admin.php" http-equiv="refresh"> 
-	<?php
-	
-}
+ 
 //checksif the login button is pressed and if the username and password text boxes have been filled
-elseif($_POST['loginSubmit']&&$_POST['loginSubmit'] == true && !empty($_POST['username']) && !empty($_POST['password']))
+if($_POST['loginSubmit'] && $_POST['loginSubmit'] == true && !empty($_POST['username']) && !empty($_POST['password']))
 {
 	$username = mysql_real_escape_string($_POST['username']);//grabs username
 	$password = md5(mysql_real_escape_string($_POST['password']));//grabs password and hashes it
@@ -133,6 +123,9 @@ elseif($_POST['loginSubmit']&&$_POST['loginSubmit'] == true && !empty($_POST['us
 		$_SESSION['Username'] = $username;
 		$_SESSION['Email'] = $email;
 		$_SESSION['LoggedIn'] = 1;
+		?>
+		<meta http-equiv="refresh" content="0;admin.php">
+		<?
 		
 }  
     else//if data doesn't match  
@@ -205,7 +198,7 @@ if($_POST['registerSubmit'] && $_POST['registerSubmit'] == true && !empty($_POST
 		//checks if email is already in the database
 		$checkemail = 'SELECT * FROM users WHERE email = "' . $email . '" LIMIT 1';
 		$result = mysql_query($checkemail);
-		elseif(mysql_num_rows($result) == 1)
+		if(mysql_num_rows($result) == 1)
 		{
 			?>
 				<script>
@@ -229,7 +222,25 @@ if($_POST['registerSubmit'] && $_POST['registerSubmit'] == true && !empty($_POST
 		{
 			?>
 				<script>
-					alert("Please enter a valid email");
+					alert("Please enter a valid email.");
+					history.back();
+				</script>
+			<?
+		}
+		elseif(strlen($username) < 4)
+		{
+			?>
+				<script>
+					alert("Usernames must be greater than or equal to 4 characters.");
+					history.back();
+				</script>
+			<?
+		}
+		elseif(strlen($password) < 6)
+		{
+			?>
+				<script>
+					alert("Passwords must be greater than or equal to 6 characters.");
 					history.back();
 				</script>
 			<?
@@ -239,7 +250,7 @@ if($_POST['registerSubmit'] && $_POST['registerSubmit'] == true && !empty($_POST
 		{
 			$hashedpass = md5($password);//hashing password afterwards so that it can be compared to the confirm password
 			//insert info into database
-			$registerquery = mysql_query("INSERT INTO users(Name,Username,Password,Email) VALUES('".$username."','".$hashedpass."','".$email."')" );
+			$registerquery = mysql_query("INSERT INTO users(Name,Username,Password,Email) VALUES('".$name."','".$username."','".$hashedpass."','".$email."')" );
 			//if successfully registered
 			if($registerquery)
 			{	
@@ -301,7 +312,6 @@ else//default form
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/jquery.smooth-scroll.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="bootbox-master/bootbox.min.js"></script>
     <script src="js/bootswatch.js"></script>
 </body>  
 </html>
