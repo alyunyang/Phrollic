@@ -52,19 +52,28 @@ include_once("base.php");
   -webkit-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
   } 
-	.footer{
+  	#wrap {
+  		min-height:100%;
+  		height: auto !important;
+  		height: 100%;
+  		margin: 0 auto -60px;
+  	}
+  	#push,
+  	#footer{
+  		height:60px;
+  	}
+	#footer{
 		 opacity: 1;
   		 background-color: rgba(0,0,0,0.6);
-
 	}
 	.texts{
-		margin-left: 490px;
-		color: grey;
+		text-align:center;
+		color: #ababab;
+		margin-top: 20px;
 	}
 	.alert{
 	margin-top: 200px;
 	}
-	
     </style>
 </head>    
 <body background="skyline.jpg">  
@@ -301,13 +310,17 @@ else//default form
       <?php
 }
 ?>
-   <footer class = "footer">
-      <div class = "texts">
+<div id="push"></div>
+ <div id="footer">
+      <div class="container">
+      <div  class = "texts">
       <small><a href = "about.php" style = "text-decoration: none;">About </a></small>
       <small><a href = "developers.php"  style = "text-decoration: none; padding-left:10px;">Developers </a></small>
       <small><a href= "documentation.php"  style = "text-decoration: none; padding-left:10px;">Documentation </a></small>
       <small>&copy 2013 Phrollic</small>
       </footer>
+      </div>
+      </div>
       </div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/jquery.smooth-scroll.min.js"></script>
