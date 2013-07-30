@@ -18,7 +18,7 @@ include_once("base.php");
     .navbar.transparent{
     border-width: 0px;
     -webkit-box-shadow: 0px 0px;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.5);
     background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
     background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
     background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
@@ -71,6 +71,7 @@ include_once("base.php");
 	.alert{
 	margin-top: 200px;
 	}
+	
     </style>
 </head>    
 <body background="skyline.jpg" style = "padding: 50px;">  
@@ -161,7 +162,7 @@ else //default form
 </div>
        <div class="span5">
         <div class = "jumbotron" style = "margin-top: 150px;">
-         <h3>Welcome to Phrollic .</h3>
+         <h3>Welcome to Phrollic.</h3>
         </div>
         </div>
         
