@@ -158,8 +158,8 @@ include_once("base.php");
     	$('#fbusername').tooltip({'trigger':'hover','title':'Your Facebook Username'});
     	$('#fbpassword').tooltip({'trigger':'hover','title':'Your Facebook Password'});
     	
-    	$('#twitterModal').addClass('animated hinge rollIn');
-    	$('#fbModal').addClass('animated hinge rollIn');
+    	$('#twitterModal').addClass('animated flipInX');
+    	$('#fbModal').addClass('animated flipInX');
 		
     	
     </script>
