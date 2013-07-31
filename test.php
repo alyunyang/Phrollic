@@ -10,7 +10,6 @@ include_once("base.php");
 	<link href="style.css" rel = "stylesheet" />
 	<link href="dist/css/bootstrap.css" rel="stylesheet">
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="default/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/bootstrap-glyphicons.css" rel="stylesheet">
     <link href="css/docs.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -53,7 +52,6 @@ include_once("base.php");
 <div class = "wrapper">
    <div class="navbar transparent navbar-fixed-bottom">
       <div class="container">
-	    <a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
@@ -70,79 +68,45 @@ include_once("base.php");
     </div>
 
   </div>
-</div>
+
 
 
 
  	<h1 class = "title" style = "font-size: 70px; margin-left: 450px;margin-top:-30px;color:#FF6600;">Phrollic</h1>
- 	<img src="logo.svg" alt="logo" width="100" height="100" style = "margin-top: -87px;margin-left:700px;"> 
- 	<hr style = "width:20%;margin-top:-5px;background:#999;">
- 	<small style = "margin-left:535px;font-size:20px;">Explore Together.</small>
+ 	<img src="logo.svg" alt="logo" width="100" height="100" style = "margin-top: -100px;margin-left:700px;"> 
+ 	<br />
+ 	<small style = "margin-left:535px;font-size:20px;color:#fff;">Explore Together.</small>
     <br />
-    <!--
-    <button class="btn btn-info" style = "margin-top: 50px;margin-left:350px;">Sign in with Twitter <img src = "twitter-icon.png" style = "margin-left:5px;"></img></button>-->
-    <!-- Button trigger modal -->
-  <a data-toggle="modal" href="#twitterModal" class="btn btn-info" style = "margin-top: 50px;margin-left:350px;">Sign in with Twitter <img src = "twitter-icon.png" style = "margin-left:5px;"></img></a>
-
+	<p style = "margin-right:1300px;margin-top:200px;font-size:20px;color:#fff">Show your Twitter and Facebook friends your location and invite them to hang out with you,whether it be casual trips to the shopping mall or luxurious vacations to Cancun. </p>
+    <p style ="text-align:left;">Already have an Account?</p><a data-toggle="modal" href="#loginModal" class="btn btn-primary" style = "margin:0 auto;">Sign in</a>
   <!-- Modal -->
-  <div class="modal fade in" id="twitterModal" data-backdrop = "static">
+  <div class="modal fade in" id="loginModal" data-backdrop = "static">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Sign In With Twitter <img src = "twitter-icon.png" style = "margin-left:5px;"></img></h4>
+          <h4 class="modal-title" style = "color:#FF6600">Sign in</h4>
         </div>
         <div class="modal-body">
-          <form class = "span4 form-inline" method = "post" action="<?php echo $_SERVER['PHP_SELF']?>" name="loginForm">
-  		<fieldset>
+          <a href="#" class="btn btn-info" style = "">Sign in with Twitter <img src = "twitter-icon.png" style = "margin-left:5px;"></img></a>
+        <br />
+         <small style = "font-size:10px;margin-left:50px;">OR</small>
+         <br />
+        <a href="#" class="btn btn-primary" style = "">Sign in with Facebook<img src = "facebook-icon.png" style = "margin-left:5px;"></img></a>
+		 <p style = "margin-left:215px;margin-top:-130px;font-size:100px;">|</p>
+        <form class = "span4 form" method = "post" action="<?php echo $_SERVER['PHP_SELF']?>" name="loginForm">
+  		<div class="form-group">
+      	<input type="text" class="form-control" name = "fbusername" id = "fbusername" placeholder = "Username" data-placement = "bottom" style = "height:40px;width:49%;margin-left:250px;margin-top:-125px;">
+    	</div>
+    	<br />
     	<div class="form-group">
-      <input type="text" class="form-control" name = "Twitusername" id = "Twitusername" placeholder = "Username" data-placement = "bottom" style = "height:40px;width:49%;>
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" name = "Twitpassword" id = "Twitpassword" placeholder = "Password" data-placement = "bottom" style = "height:40px;width:49%;>
-    </div>
+      	<input type="password" class="form-control" name = "fbpassword" id = "fbpassword" placeholder = "Password" data-placement = "bottom" style = "height:40px;width:49%;margin-left:250px;margin-top:-10px;">
+    	</div>
     <div class="checkbox"></div>
-  </fieldset>
-        </div>
-        <br />
-        <br />
-        <br />
-        	<input type = "reset" value = "Clear" class="btn btn-default" style = "margin-left:300px;margin-bottom:30px;">
-        	<input type="hidden" name="Twitterlogin" id="Twitter" value="true" />  
-    		<input type="submit" class="btn btn-large btn-info" value="Login" style = "margin-bottom:30px;"/> 
-        </form>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-    <h3 style = "text-align:center;">OR</h3>
-	<a data-toggle="modal" href="#fbModal" class="btn btn-primary" style = "margin-top: -99px;margin-left:680px;">Sign in with Facebook<img src = "facebook-icon.png" style = "margin-left:5px;"></img></a>
-
-  <!-- Modal -->
-  <div class="modal fade in" id="fbModal" data-backdrop = "static">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Sign In With Facebook<img src = "facebook-icon.png" style = "margin-left:5px;"></img></h4>
-        </div>
-        <div class="modal-body">
-          <form class = "span4 form-inline" method = "post" action="<?php echo $_SERVER['PHP_SELF']?>" name="loginForm">
-  		<fieldset>
-    	<div class="form-group">
-      <input type="text" class="form-control" name = "fbusername" id = "fbusername" placeholder = "Username" data-placement = "bottom" style = "height:40px;width:49%;>
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" name = "fbpassword" id = "fbpassword" placeholder = "Password" data-placement = "bottom" style = "height:40px;width:49%;>
-    </div>
-    <div class="checkbox"></div>
-  </fieldset>
-        </div>
-        <br />
-        <br />
-        <br />
+    	</div>
         	<input type = "reset" value = "Clear" class="btn btn-default" style = "margin-left:300px;margin-bottom:30px;">
         	<input type="hidden" name="Fblogin" id="Fblogin" value="true" />  
-    		<input type="submit" class="btn btn-large btn-primary" value="Login" style = "margin-bottom:30px;"/> 
+    		<input type="submit" class="btn btn-large btn-danger" value="Login" style = "margin-bottom:30px;"/> 
         </form>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -151,16 +115,8 @@ include_once("base.php");
     <script src="js/jquery.smooth-scroll.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <script>
-    	$('#name').tooltip({'trigger':'hover','title':'John Doe'});
-    	$('#email').tooltip({'trigger':'hover','title':'john.doe@example.com'});
     	$('#Twitusername').tooltip({'trigger':'hover','title':'Your Twitter Username'});
     	$('#Twitpassword').tooltip({'trigger':'hover','title':'Your Twitter Password'});
-    	$('#fbusername').tooltip({'trigger':'hover','title':'Your Facebook Username'});
-    	$('#fbpassword').tooltip({'trigger':'hover','title':'Your Facebook Password'});
-    	
-    	$('#twitterModal').addClass('animated flipInX');
-    	$('#fbModal').addClass('animated flipInX');
-		
     	
     </script>
 </body>  
