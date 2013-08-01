@@ -1,6 +1,17 @@
 <?php 
-include_once("base.php");
-
+session_start();
+if (isset($_SESSION['id'])) {
+// Redirection to login page twitter or facebook
+header("location: home.php");
+}
+if (array_key_exists("login", $_GET)) 
+{
+$oauth_provider = $_GET['oauth_provider'];
+if ($oauth_provider == 'twitter')
+{
+header("Location: login-twitter.php");
+}
+}
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">    
@@ -16,6 +27,9 @@ include_once("base.php");
     <link href="css/animate-custom.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="login.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
     <style>
     .navbar.transparent{
     border-width: 0px;
@@ -48,7 +62,7 @@ include_once("base.php");
 	
     </style>
 </head>    
-<body background="skyline.jpg" style = "padding: 50px;">  
+<body ">  
 <div class = "wrapper">
    <div class="navbar transparent navbar-fixed-bottom">
       <div class="container">
@@ -73,12 +87,11 @@ include_once("base.php");
 
 
  	<h1 class = "title" style = "font-size: 70px; margin-left: 450px;margin-top:-30px;color:#FF6600;">Phrollic</h1>
- 	<img src="logo.svg" alt="logo" width="100" height="100" style = "margin-top: -100px;margin-left:700px;"> 
+ 	<img src="logo.svg" alt="logo" width="150" height="100" style = "margin-top: -100px;margin-left:700px;"> 
  	<br />
  	<small style = "margin-left:535px;font-size:20px;color:#fff;">Explore Together.</small>
     <br />
-	<p style = "margin-right:1300px;margin-top:200px;font-size:20px;color:#fff">Show your Twitter and Facebook friends your location and invite them to hang out with you,whether it be casual trips to the shopping mall or luxurious vacations to Cancun. </p>
-    <p style ="text-align:left;">Already have an Account?</p><a data-toggle="modal" href="#loginModal" class="btn btn-primary" style = "margin:0 auto;">Sign in</a>
+ <br/>   <p style ="margin-left:535px;font-size:20px;color:#fff"></p><a data-toggle="modal" href="#loginModal" class="btn btn-primary" style = "margin-left:565px;  auto;">Sign in</a>
   <!-- Modal -->
   <div class="modal fade in" id="loginModal" data-backdrop = "static">
     <div class="modal-dialog">
@@ -87,16 +100,16 @@ include_once("base.php");
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" style = "color:#FF6600">Sign in</h4>
         </div>
-        <div class="modal-body">
-          <a href="#" class="btn btn-info" style = "">Sign in with Twitter <img src = "twitter-icon.png" style = "margin-left:5px;"></img></a>
+        <div class="modal-body" >
+          <a href="#" class="btn btn-info" href = "?login&amp;oauth_provider=twitter" style = "">Sign in with Twitter <img src = "twitter-icon.png" style = "margin-left:5px;"></img></a>
         <br />
          <small style = "font-size:10px;margin-left:50px;">OR</small>
          <br />
         <a href="#" class="btn btn-primary" style = "">Sign in with Facebook<img src = "facebook-icon.png" style = "margin-left:5px;"></img></a>
-		 <p style = "margin-left:215px;margin-top:-130px;font-size:100px;">|</p>
+        <hr style="margin-left:230px;width:.10em; height: 10em;margin-top:-120px; background: #FF6600;">
         <form class = "span4 form" method = "post" action="<?php echo $_SERVER['PHP_SELF']?>" name="loginForm">
   		<div class="form-group">
-      	<input type="text" class="form-control" name = "fbusername" id = "fbusername" placeholder = "Username" data-placement = "bottom" style = "height:40px;width:49%;margin-left:250px;margin-top:-125px;">
+      	<input type="text" class="form-control" name = "fbusername" id = "fbusername" placeholder = "Username" data-placement = "bottom" style = "height:40px;width:49%;margin-left:250px;margin-top:-145.5px;">
     	</div>
     	<br />
     	<div class="form-group">
@@ -118,6 +131,19 @@ include_once("base.php");
     	$('#Twitusername').tooltip({'trigger':'hover','title':'Your Twitter Username'});
     	$('#Twitpassword').tooltip({'trigger':'hover','title':'Your Twitter Password'});
     	
+    </script>
+    	<script src="jquery.js"></script>
+    <script src="jquery.backstretch.js"></script>
+    <script>
+        $.backstretch([
+          "skyline.jpg",
+          "abu.jpg",
+        "beach.jpg",
+
+        ], {
+            fade: 750,
+            duration: 10000
+        });
     </script>
 </body>  
 </html>
